@@ -1,0 +1,7 @@
+{
+  "name": "bang",
+  "short_name": "bang",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": []
+}

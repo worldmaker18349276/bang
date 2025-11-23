@@ -1,4 +1,4 @@
-import { bangs } from "./bang.js";
+import * as bangs from "./bangs.json";
 
 function doRedirect() {
   const url = new URL(window.location.href);
@@ -8,7 +8,7 @@ function doRedirect() {
 
   const match = query.match(/!(\S+)/i);
   const bangCandidate = match?.[1]?.toLowerCase() ?? bang;
-  const selectedBang = bangs.find((b) => b.t === bangCandidate);
+  const selectedBang = bangs[bangCandidate];
   if (!selectedBang) {
     document.body.innerHTML = `unknown bang ${bangCandidate}`;
     return;
@@ -16,10 +16,6 @@ function doRedirect() {
 
   // Remove the first bang from the query
   const cleanQuery = query.replace(/!\S+\s*/i, "").trim();
-
-  // If the query is just `!gh`, use `github.com` instead of `github.com/search?q=`
-  if (cleanQuery === "")
-    return selectedBang ? `https://${selectedBang.d}` : null;
 
   // Format of the url is:
   // https://www.google.com/search?q={{{s}}}

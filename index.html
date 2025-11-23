@@ -1,16 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
     <title>❗</title>
     <meta name="description" content="A better default search engine with bangs!"/>
-  </head>
-  <style>
-    @media (prefers-color-scheme: dark) {
-      :root {
-        background-color: #222;
+    <link rel="manifest" href="manifest.json">
+    <script>
+      navigator.serviceWorker.register("/bang/sw.js");
+    </script>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        :root {
+          background-color: #222;
+        }
       }
-    }
-  </style>
-  <script type="module" src="main.js"></script>
+    </style>
+  </head>
+  <body>
+    <input type="text" class="url-input" value="https://worldmaker18349276.github.io/bang?q=%s" readonly/>
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
