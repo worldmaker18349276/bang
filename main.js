@@ -7,7 +7,7 @@ async function doRedirect() {
   const match = query.match(/!(\S+)/i);
   const bangCandidate = match?.[1]?.toLowerCase() ?? bang;
 
-  const bangs = (await fetch("bangs.json"))?.json();
+  const bangs = await fetch("bangs.json").then(r => r.json());
   const selectedBang = bangs[bangCandidate];
   if (selectedBang === undefined) {
     document.body.innerHTML = `unknown bang ${bangCandidate}`;
