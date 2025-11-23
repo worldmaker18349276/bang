@@ -1,6 +1,4 @@
-import * as bangs from "./bangs.json" assert { type: "json" };
-
-function doRedirect() {
+async function doRedirect() {
   const url = new URL(window.location.href);
   const query = url.searchParams.get("q")?.trim() ?? "";
   const bang = url.searchParams.get("b")?.trim() ?? "g";
@@ -8,6 +6,8 @@ function doRedirect() {
 
   const match = query.match(/!(\S+)/i);
   const bangCandidate = match?.[1]?.toLowerCase() ?? bang;
+
+  const bangs = (await fetch("data.json"))?.json();
   const selectedBang = bangs[bangCandidate];
   if (selectedBang === undefined) {
     document.body.innerHTML = `unknown bang ${bangCandidate}`;

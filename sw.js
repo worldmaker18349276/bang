@@ -4,6 +4,7 @@ const ASSETS = [
   "./",
   "./index.html",
   "./main.js",
+  "./bangs.json",
 ];
 
 // Install: cache all static assets
