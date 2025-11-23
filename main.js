@@ -1,4 +1,4 @@
-import * as bangs from "./bangs.json";
+import * as bangs from "./bangs.json" assert { type: "json" };
 
 function doRedirect() {
   const url = new URL(window.location.href);
@@ -9,7 +9,7 @@ function doRedirect() {
   const match = query.match(/!(\S+)/i);
   const bangCandidate = match?.[1]?.toLowerCase() ?? bang;
   const selectedBang = bangs[bangCandidate];
-  if (!selectedBang) {
+  if (selectedBang === undefined) {
     document.body.innerHTML = `unknown bang ${bangCandidate}`;
     return;
   }
@@ -19,7 +19,7 @@ function doRedirect() {
 
   // Format of the url is:
   // https://www.google.com/search?q={{{s}}}
-  const searchUrl = selectedBang?.u.replace(
+  const searchUrl = selectedBang.u.replace(
     "{{{s}}}",
     // Replace %2F with / to fix formats like "!ghr+t3dotgg/unduck"
     encodeURIComponent(cleanQuery).replace(/%2F/g, "/"),
